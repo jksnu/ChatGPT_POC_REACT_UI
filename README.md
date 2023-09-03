@@ -1,3 +1,8 @@
+UI Branch: ChatGPT_POC_REACT_UI
+API Branch: ChatGPT_POC_REACT_API
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
