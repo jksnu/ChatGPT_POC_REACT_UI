@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
+
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const App = () => {
+  const [query, setQuery] = useState('');
+  const [reply, setReply] = useState('');
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('http://localhost:3001/api/query', { query });
+
+      setReply(response.data.reply);
+    } catch (error) {
+      console.error('Error:', error.response.data);
+    }
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>My Chatbot</h1>
+      <form onSubmit={handleSubmit}>
+        <input type="text" value={query} onChange={(e) => setQuery(e.target.value)} />
+        <button type="submit">Send</button>
+      </form>
+      {reply && <p>{reply}</p>}
     </div>
   );
-}
+};
 
 export default App;
